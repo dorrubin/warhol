@@ -1,1 +1,9 @@
 <h1>Welcome to Index</h1>
+
+
+<form method="POST" action="/signin">
+	<input type="text" name="username" placeholder="Enter your username"> <br>
+	<input type="password" name="password" placeholder="Enter password"> <br>
+	<input type="submit" value="Sign In">
+	<div class="error"><%= @message %></div>
+</form>
