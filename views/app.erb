@@ -4,8 +4,10 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>Warhol App</title>
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="/css/normalize.css">
 	<link rel="stylesheet" href="/css/style.css">
+
 </head>
 <body>
 	<nav>
@@ -15,7 +17,7 @@
 		<div class="right-nav">
 		  <a href="/browse">Browse</a> |
 		  <a href="/collections">Collections</a> |
-		  <a href="/collections/#{current_user_id}"><%=current_username%></a>
+		  <a href="/collections/<%=current_username%>"><%=current_username%></a>
 		</div>
 	</nav>
 	<div class="container">

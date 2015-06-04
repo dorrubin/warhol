@@ -56,7 +56,6 @@ module Warhol
 
     # -- APP --
 		get ('/browse') do
-			# @cards = Card.find_all_by_author_id(id)
 			@url = @url || DEFAULT_URL
 			erb :browse, :layout => :app
 		end
@@ -70,7 +69,6 @@ module Warhol
 			params["author_id"] = current_user_id
 			params["author"] = current_username
 			@card = Card.new(params)
-			binding.pry
 			@card.save
 			redirect ("/browse")
 			erb :browse, :layout => :app
@@ -80,8 +78,8 @@ module Warhol
     # -- Collections --
 		get ('/collections') do
 			@all_cards = Card.all
-			binding.pry
 			if logged_in?
+				@current_user = current_username
 				erb :collections, :layout => :app
 			else
 				erb :collections
@@ -89,11 +87,26 @@ module Warhol
 		end
 
 		get ('/collections/:username') do
-			id = params[:id]
-			erb :collection
+			username = params[:username]
+			@user_cards = Card.find_all_by_author(username)
+			username = params[:username]
+			if logged_in?
+				@current_user = current_username
+				erb :collection, :layout => :app
+			else
+				erb :collection
+			end
 		end
 
-
+		get ('/collections/:username/:id') do
+			@card = Card.find_by_id(id)
+			if logged_in?
+				@current_user = current_username
+				erb :collections, :layout => :app
+			else
+				erb :collections
+			end
+		end
 
 	end #class
 end #module

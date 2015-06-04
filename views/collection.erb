@@ -1,1 +1,9 @@
-<h1>This is a collection</h1>
+<h1>These are some cards</h1>
+	<% @user_cards.each do |card| %>
+	<div class="card">
+		<p><%= card.value %></p>
+		<p>--<%= card.author %></p>
+		<!-- <p><%= card.tags %></p> -->
+		<p>Last Updated: <%= card.updated %></p>
+	</div>
+	<% end %>
