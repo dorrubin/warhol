@@ -13,8 +13,9 @@
 			<a href="/">Home</a>
 		</div>
 		<div class="right-nav">
-		  <a href="/collections">Browse</a> |
-		  <a href="#"><%=current_user%></a>
+		  <a href="/browse">Browse</a> |
+		  <a href="/collections">Collections</a> |
+		  <a href="/collections/#{current_user_id}"><%=current_username%></a>
 		</div>
 	</nav>
 	<div class="container">

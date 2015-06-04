@@ -1,1 +1,21 @@
 <h1>Hello from Browse</h1>
+
+
+<div class="column-left">
+	<form method="post" action="/browse">
+		<input type="text" value="<%= @url %>" name="url">
+		<input type="submit" value="Go!">
+	</form>
+	<iframe src="<%= @url %>"></iframe>
+</div>
+<div class="column-right">
+	<form class="create" method="post" action="/browse/create">
+		<textarea name="value"></textarea>
+		<input type="text" name="tags" placeholder="Add Tags">
+		<input type="submit" value="create card">
+	</form>
+	<div class="card">
+		
+	</div>
+
+</div>
