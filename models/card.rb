@@ -30,7 +30,6 @@ module Warhol
 
 		def self.find_by_tag(tag)
 			topic = "{#{tag}}"
-			binding.pry
 			query = "select * FROM cards WHERE tags @> $1;"
 			$db.exec_params(query, [topic]).map do |row|
 				Card.new(row)
@@ -52,7 +51,6 @@ module Warhol
 		end
 		
 		def edit (params)
-			binding.pry
 			value = params["value"]
 			tags = "{#{params["tags"]}}"
 			id = params["id"]
@@ -68,10 +66,9 @@ module Warhol
 
 
 		#This doesnt work -- to parse string tag
-		def parse(string)
-			no_l = string.delete"{{"
-			no_r = no_l.delete"}}"
-			no_r.split(",")
+		def parse(obj)
+			intermediary = obj.first.tags.delete!"}"
+			intermediary.first.tags.delete"{"
 		end
 
 	end #card-class

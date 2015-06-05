@@ -79,7 +79,10 @@ module Warhol
     # -- Collections --
 		get ('/collections') do
 			@all_cards = Card.all
-			if logged_in?
+			if params[:tag]
+				tag = params[:tag]
+				redirect ("/collections/topic/#{tag}")
+			elsif logged_in?
 				@current_user = current_username
 				erb :collections, :layout => :app
 			else
@@ -87,7 +90,10 @@ module Warhol
 			end
 		end
 
-		get ('/collections/:tag') do
+
+			
+
+		get ('/collections/topic/:tag') do
 			@tag = params[:tag]
 			tag = params[:tag]
 			@topic_cards = Card.find_by_tag(tag)

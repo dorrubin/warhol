@@ -1,0 +1,12 @@
+<h1>These are the cards under <%= current_username %></h1>
+	<% @user_cards.each do |card| %>
+	<div class="card">
+		<% if current_username == params[:username] %>
+			<a href="/collections/<%= current_username %>/<%= card.id %>" class="options"><i class="fa fa-wrench"></i><a>
+		<% end %>
+		<p><%= card.value %></p>
+		<p>--<%= card.author %></p>
+		<p><%= card.tags %></p>
+		<p>Last Updated: <%= card.updated %></p>
+	</div>
+	<% end %>
