@@ -1,15 +1,16 @@
 <h1>These are all the cards</h1>
-		<form method="get" action="/collections">
-			<input type="text" value="<%= @tag %>" name="tag">
+		<form class="collections-search" method="get" action="/collections">
+			<label for="tag">Tag Search:</label>
+			<input type="text" value="<%= @tag %>" name="tag" placeholder="ex. art, music">
 			<input type="submit" value="Go!">
 		</form>
 		<br>
 		<br>
 	<% @all_cards.each do |card| %>
 	<div class="card">
-		<p><%= card.value %></p>
-		<p>--<%= card.author %></p>
-		<p><%= card.tags %></p>
-		<p>Last Updated: <%= card.updated %></p>
+		<q class="value"><%= card.value %></q> <br>
+		<a href="/collections/<%= card.author %>"><cite class="author">@<%= card.author %></cite></a>
+		<p class="tags"><%= card.tags %></p>
+		<p class="time">Last Updated: <%= card.updated %></p>
 	</div>
 	<% end %>

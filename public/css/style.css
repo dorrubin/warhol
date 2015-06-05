@@ -3,12 +3,14 @@
 /*-----HOME-----*/
 body {
 	font-family: 'Poppins', sans-serif;
+	background: url(http://ffaasstt.swide.com/wp-content/uploads/tomato-history-and-origins-campbell-soup-andy-warhol.jpg) repeat-x 0px 200px;
 }
 
 nav {
 	width: 90%;
 	margin-left: 5%;
 	padding-top: 5px;
+	background-color: white;
 }
 
 h1 {
@@ -80,16 +82,31 @@ textarea {
 	position: fixed;
 	border: 1px solid black;
 	border-radius: 5px;
+	background-color: white;
+}
+
+/*-----BROWSE-----*/
+
+.collections-search {
+	text-align: center;
+	float: none;
 }
 
 .card {
-	width: 30%;
+	width: 31%;
+	padding: 5px;
 	float: left;
 	height:200px;
 	margin: 5px;
 	border: 1px solid black;
+	background-color: white;
+	overflow: scroll;
 }
 
 .options {
 	float:right;
+}
+
+.time {
+	font-style: italic;
 }

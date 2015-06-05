@@ -4,10 +4,10 @@
 		<% if current_username == params[:username] %>
 			<a href="/collections/<%= current_username %>/<%= card.id %>" class="options"><i class="fa fa-wrench"></i><a>
 		<% end %>
-		<p><%= card.value %></p>
-		<p>--<%= card.author %></p>
-		<p><%= card.tags %></p>
-		<p>Last Updated: <%= card.updated %></p>
+		<q class="value"><%= card.value %></q> <br>
+		<a href="/collections/<%= card.author %>"><cite class="author">@<%= card.author %></cite></a>
+		<p class="tags"><%= card.tags %></p>
+		<p class="time">Last Updated: <%= card.updated %></p>
 		<% if current_username == params[:username] %>
 			<form method="post" action='/collections/share/<%= card.id %>'>
 				<input type="text" placeholder="enter username" name="username">
