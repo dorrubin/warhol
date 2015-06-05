@@ -1,4 +1,5 @@
 require_relative 'models/user'
+require_relative 'models/card'
 
 module Warhol
 	class Server < Sinatra::Base
@@ -89,7 +90,6 @@ module Warhol
 		get ('/collections/:username') do
 			username = params[:username]
 			@user_cards = Card.find_all_by_author(username)
-			username = params[:username]
 			if logged_in?
 				@current_user = current_username
 				erb :collection, :layout => :app
@@ -99,14 +99,34 @@ module Warhol
 		end
 
 		get ('/collections/:username/:id') do
+			username = params[:id]
+			id = params[:id]
 			@card = Card.find_by_id(id)
-			if logged_in?
-				@current_user = current_username
-				erb :collections, :layout => :app
+			if logged_in? and username = current_username
+				erb :card, :layout => :app
 			else
-				erb :collections
+				status 403
+				redirect ('/')
 			end
 		end
+
+		delete ('/collections/:id') do
+			params["author"] = current_username
+			id = params[:id]
+			@card = Card.find_by_id(id).first
+			@card.remove_db
+			redirect ("/collections/#{current_username}")
+		end
+		
+		patch ('/collections/:id') do
+			id = params[:id]
+			@card = Card.find_by_id(id).first
+			@card.tags = params[:tags]
+			@card.value = params[:value]
+			@card.edit(params)
+			binding.pry
+			redirect ("/collections/#{current_username}")
+    end
 
 	end #class
 end #module

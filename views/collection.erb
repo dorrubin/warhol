@@ -1,6 +1,10 @@
-<h1>These are some cards</h1>
+<h1>These are <%=current_username%>'s cards</h1>
 	<% @user_cards.each do |card| %>
 	<div class="card">
+		<div class="options">
+			<a href="/collections/<%=card.author%>/<%=card.id%>"><i class="fa fa-wrench"></i></a>
+			<a href="#"><i class="fa fa-trash-o"></i></a>
+		</div>
 		<p><%= card.value %></p>
 		<p>--<%= card.author %></p>
 		<!-- <p><%= card.tags %></p> -->
