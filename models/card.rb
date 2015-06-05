@@ -36,6 +36,11 @@ module Warhol
 			end
 		end
 
+		def self.find_id_by_username(username)
+			query = "SELECT id FROM users WHERE username=$1"
+			$db.exec_params(query, [username]).first
+		end
+
 		def self.find_all_by_author(username)
 			query = "SELECT cards.*, users.username AS author FROM cards JOIN users ON users.id = cards.author_id WHERE users.username=$1;"
 			$db.exec_params(query, [username]).map do |row|

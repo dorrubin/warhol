@@ -7,3 +7,5 @@ gem "sinatra-contrib"
 gem "pg"
 gem "pry"
 gem "redcarpet"
+gem "twilio-ruby"
+gem 'sendgrid-ruby'

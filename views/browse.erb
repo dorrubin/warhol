@@ -2,9 +2,9 @@
 
 
 <div class="column-left">
-	<form method="post" action="/browse">
-		<input type="text" value="<%= @url %>" name="url">
-		<input type="submit" value="Go!">
+	<form class="search" method="post" action="/browse">
+		<input class="broswer" type="text" value="<%= @url %>" name="url">
+		<input class="go" type="submit" value="Go!">
 	</form>
 	<iframe src="<%= @url %>"></iframe>
 </div>

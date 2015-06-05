@@ -2,12 +2,13 @@ require_relative 'models/user'
 require_relative 'models/card'
 
 module Warhol
+
 	class Server < Sinatra::Base
 		configure do 
 			register Sinatra::Reloader
       set :sessions, true
 		end
-    
+
     def current_user_id
       session[:user_id]
     end
@@ -90,8 +91,19 @@ module Warhol
 			end
 		end
 
-
-			
+		post ('/collections/share/:id') do
+			id = params[:id]
+			@card = Card.find_by_id(id).first
+			response = Card.find_id_by_username(params["username"])
+			binding.pry
+			params["author_id"] = response["id"]
+			params["value"] = @card.value
+			params["tags"] = @card.tags
+			@share = Card.new(params)
+			@share.save
+			binding.pry
+			redirect ("/collections/#{current_username}")
+		end
 
 		get ('/collections/topic/:tag') do
 			@tag = params[:tag]
@@ -121,8 +133,7 @@ module Warhol
 			id = params[:id]
 			@card = Card.find_by_id(id)
 			almost_value = @card.first.tags.delete!"}"
-			@format_value = @card.first.tags.delete"{"
-			binding.pry
+			@format_value = almost_value.delete"{"
 			if logged_in? and username = current_username
 				erb :card, :layout => :app
 			else

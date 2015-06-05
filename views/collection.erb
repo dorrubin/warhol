@@ -1,4 +1,4 @@
-<h1>These are the cards under <%= current_username %></h1>
+<h1>These are the cards under <%= params[:username] %></h1>
 	<% @user_cards.each do |card| %>
 	<div class="card">
 		<% if current_username == params[:username] %>
@@ -8,5 +8,11 @@
 		<p>--<%= card.author %></p>
 		<p><%= card.tags %></p>
 		<p>Last Updated: <%= card.updated %></p>
+		<% if current_username == params[:username] %>
+			<form method="post" action='/collections/share/<%= card.id %>'>
+				<input type="text" placeholder="enter username" name="username">
+				<input type="submit" value="share">
+			</form>
+		<% end %>
 	</div>
 	<% end %>
