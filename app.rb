@@ -87,6 +87,18 @@ module Warhol
 			end
 		end
 
+		get ('/collections/:tag') do
+			@tag = params[:tag]
+			tag = params[:tag]
+			@topic_cards = Card.find_by_tag(tag)
+			if logged_in?
+				@current_user = current_username
+				erb :topic, :layout => :app
+			else
+				erb :topic
+			end
+		end
+
 		get ('/collections/:username') do
 			username = params[:username]
 			@user_cards = Card.find_all_by_author(username)
@@ -102,6 +114,9 @@ module Warhol
 			username = params[:id]
 			id = params[:id]
 			@card = Card.find_by_id(id)
+			almost_value = @card.first.tags.delete!"}"
+			@format_value = @card.first.tags.delete"{"
+			binding.pry
 			if logged_in? and username = current_username
 				erb :card, :layout => :app
 			else
@@ -121,10 +136,9 @@ module Warhol
 		patch ('/collections/:id') do
 			id = params[:id]
 			@card = Card.find_by_id(id).first
-			@card.tags = params[:tags]
+			@card.tags = "{#{params[:tags]}}"
 			@card.value = params[:value]
 			@card.edit(params)
-			binding.pry
 			redirect ("/collections/#{current_username}")
     end
 

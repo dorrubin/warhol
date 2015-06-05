@@ -1,0 +1,9 @@
+<h1>These are the cards under <%=@tag%></h1>
+	<% @topic_cards.each do |card| %>
+	<div class="card">
+		<p><%= card.value %></p>
+		<p>--<%= card.author %></p>
+		<!-- <p><%= card.tags %></p> -->
+		<p>Last Updated: <%= card.updated %></p>
+	</div>
+	<% end %>

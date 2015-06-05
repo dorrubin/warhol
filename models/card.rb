@@ -8,7 +8,7 @@ module Warhol
 			@value = hash["value"]
 			@author_id = hash["author_id"]
 			@author = hash["author"]
-			@tags = "{#{hash['tags'].split(' ').join(',')}}"
+			@tags = hash["tags"]
 			@created = hash["created_at"]
 			@updated = hash["last_updated"]
 		end
@@ -16,7 +16,7 @@ module Warhol
 		def save
 			value = @value
 			author = @author_id
-      tags = @tags
+      tags = "{#{@tags.split(' ').join(',')}}"
 			query = "INSERT INTO cards (value, author_id, tags, created_at, last_updated) VALUES ($1, $2, $3, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP) RETURNING id"
       $db.exec_params(query, [value, author, tags])
 		end
@@ -28,12 +28,21 @@ module Warhol
 		end
 
 
+		def self.find_by_tag(tag)
+			topic = "{#{tag}}"
+			binding.pry
+			query = "select * FROM cards WHERE tags @> $1;"
+			$db.exec_params(query, [topic]).map do |row|
+				Card.new(row)
+			end
+		end
+
 		def self.find_all_by_author(username)
 			query = "SELECT cards.*, users.username AS author FROM cards JOIN users ON users.id = cards.author_id WHERE users.username=$1;"
 			$db.exec_params(query, [username]).map do |row|
 				Card.new(row)
 			end
-		end
+		end		
 		
 		def self.find_by_id(id)
 			query = "SELECT cards.*, users.username FROM cards JOIN users ON users.id = cards.author_id WHERE cards.id=$1;"
@@ -43,8 +52,9 @@ module Warhol
 		end
 		
 		def edit (params)
+			binding.pry
 			value = params["value"]
-			tags = params["tags"]
+			tags = "{#{params["tags"]}}"
 			id = params["id"]
 			query = "UPDATE cards SET value = $1, tags = $2, last_updated = CURRENT_TIMESTAMP
         WHERE id = #{id}"
