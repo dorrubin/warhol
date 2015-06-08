@@ -28,9 +28,9 @@ module Warhol
 		end
 
 
-		def self.find_by_tag(tag)
+		def self.find_by_tag(tag)			
 			topic = "{#{tag}}"
-			query = "select * FROM cards WHERE tags @> $1;"
+			query = "SELECT cards.*, users.username AS author FROM cards JOIN users ON users.id = cards.author_id WHERE tags @> $1;"
 			$db.exec_params(query, [topic]).map do |row|
 				Card.new(row)
 			end

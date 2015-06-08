@@ -1,11 +1,11 @@
-<h1>These are all the cards</h1>
+<h1>All Cards</h1>
 		<form class="collections-search" method="get" action="/collections">
 			<label for="tag">Tag Search:</label>
 			<input type="text" value="<%= @tag %>" name="tag" placeholder="ex. art, music">
 			<input type="submit" value="Go!">
 		</form>
 		<br>
-		<br>
+		<hr>
 	<% @all_cards.each do |card| %>
 	<div class="card">
 		<q class="value"><%= card.value %></q> <br>

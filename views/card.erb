@@ -1,15 +1,13 @@
 <h1>Edit this Card</h1>
+	<form action="/collections/<%= @card.first.id %>" method="POST" id="delete">
+		<input type="hidden" name="_method" value="DELETE">
+		<input type="submit" value="Delete Card">
+	</form>
 	<form action="/collections/<%= @card.first.id %>" method="POST">
 		<input type="hidden" name="_method" value="PATCH">
 		<input type="text" name="value" value="<%= @card.first.value %>">
 		<input type="text" name="tags" value="<%= @format_value %>" placeholder="Comma seperated">
 		<input type="submit" value="Submit Changes">
 	</form>
-	<br>
-	<hr>
-	<br>
-<h1>Delete this Card</h1>
-	<form action="/collections/<%= @card.first.id %>" method="POST">
-		<input type="hidden" name="_method" value="DELETE">
-		<input type="submit" value="Delete Card">
-	</form>
+	
+

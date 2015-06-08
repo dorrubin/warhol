@@ -26,7 +26,12 @@ module Warhol
 
     # -- HOMEPAGE --
 		get ('/') do
-			erb :index
+			if logged_in?
+				@current_user = current_username
+				erb :browse, :layout => :app
+			else
+				erb :index
+			end
 		end
 
 		post '/signin' do
@@ -95,13 +100,11 @@ module Warhol
 			id = params[:id]
 			@card = Card.find_by_id(id).first
 			response = Card.find_id_by_username(params["username"])
-			binding.pry
 			params["author_id"] = response["id"]
 			params["value"] = @card.value
 			params["tags"] = @card.tags
 			@share = Card.new(params)
 			@share.save
-			binding.pry
 			redirect ("/collections/#{current_username}")
 		end
 

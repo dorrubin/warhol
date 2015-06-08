@@ -15,7 +15,7 @@ CREATE TABLE users (
 
 CREATE TABLE cards (
 	id 			  		SERIAL 	PRIMARY KEY,
-	value 	  		VARCHAR, 
+	value 	  		TEXT, 
 	author_id  		INTEGER NOT NULL,
 	tags 		  		VARCHAR ARRAY,
 	created_at		TIMESTAMP NOT NULL,

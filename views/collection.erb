@@ -1,4 +1,4 @@
-<h1>These are the cards under <%= params[:username] %></h1>
+<h1><%= params[:username] %>'s Cards</h1>
 	<% @user_cards.each do |card| %>
 	<div class="card">
 		<% if current_username == params[:username] %>

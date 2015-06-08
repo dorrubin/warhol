@@ -1,9 +1,11 @@
-<h1>Welcome to Index</h1>
+<h1>Welcome to Warhol</h1>
 
 
 <form method="POST" action="/signin">
-	<input type="text" name="username" placeholder="Enter your username"> <br>
-	<input type="password" name="password" placeholder="Enter password"> <br>
-	<input type="submit" value="Sign In">
+	<label for="username">Username:</label>
+	<input class="register" type="text" name="username">
+	<label for="password">Password:</label>
+	<input class="register" type="password" name="password">
+	<input class="register" type="submit" value="Sign In">
 	<div class="error"><%= @message %></div>
 </form>
