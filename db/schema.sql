@@ -21,3 +21,9 @@ CREATE TABLE cards (
 	created_at		TIMESTAMP NOT NULL,
 	last_updated	TIMESTAMP NOT NULL
 );
+
+CREATE TABLE shares (
+	id 			  		SERIAL 	PRIMARY KEY,
+	card_id   		INTEGER NOT NULL,
+	count					INTEGER
+);

@@ -58,6 +58,7 @@ iframe {
 textarea {
 	width: 98%;
 	min-height: 200px;
+	line-height: 16px;
 }
 .search {
 	text-align: center;

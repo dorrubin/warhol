@@ -70,11 +70,5 @@ module Warhol
 		end
 
 
-		#This doesnt work -- to parse string tag
-		def parse(obj)
-			intermediary = obj.first.tags.delete!"}"
-			intermediary.first.tags.delete"{"
-		end
-
 	end #card-class
 end #module

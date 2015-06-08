@@ -28,7 +28,7 @@ module Warhol
 		get ('/') do
 			if logged_in?
 				@current_user = current_username
-				erb :browse, :layout => :app
+				redirect ('/browse')
 			else
 				erb :index
 			end
